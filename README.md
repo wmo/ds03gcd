@@ -1,3 +1,7 @@
+# Introduction 
+
+The data analysed is the [Human Activity Recognition Using Smartphones Data Set](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones), in which 30 volunteers performed 6 activities ( walking, sitting,...) while wearing on their waist a smarthphone which recorded the data of the accelerometer and gyroscope. 
+
 # Quick start
 
 Note: the script takes care of downloading and caching the datafile. 
@@ -8,6 +12,7 @@ Note: the script takes care of downloading and caching the datafile.
 - after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
 The dataframe will look like this, when viewed in RStudio: 
+
 ![](sample_snap.png)
 
 It has these dimensions: 180 observations of 75 variables.
@@ -19,20 +24,21 @@ See [codebook](codebook.md) for description of the datafields.
 The requested dataframe `df` contains the final, tidy data-set, but there are some extra dataframes created in the process, which may be of good use:
 
 - `dfc` : the comprehensive dataframe, contains all columns, all data 
-- `dfs` : the selective dataframe, is the same as `dfc` but with the feature columns whitled down to only *std* and *mean* 
+- `dfs` : the selective dataframe, is the same as `dfc` but with the feature columns whittled down to only *std* and *mean* 
 - `dfnrw` : the narrow dataframe, which is a molten form of `dfs`, and which formed the basis to create the final `df` from.
 
-For performance reasons you may want to play around with only a subset of the data. This can be easily done: change the variable `max_observations` for example to '125' in the script. This gives a faster load time, and it also is faster to do certain transformations.
+
+Experimentation: for performance reasons you may want to play around with only a *subset* of the data. This can be easily done: change the variable `max_observations` to '125' (or lower) in the script. This gives a shorter load time, and makes it faster to do certain transformations.
 
 
 # Preconditions
 
-You should have R installed plus following packages:
+You should have an installation of R with following extra packages installed:
 
     - plyr
     - reshape2
 
-The datafile has should have these files (subdirectory in which these are is of no importance) 
+The zipfile has should have these files in one of the subdirectories: 
 
 - features.txt 
 - subject_test.txt 
@@ -44,11 +50,6 @@ The datafile has should have these files (subdirectory in which these are is of 
 
 
 ## Quick-fix to common problems
-
-In case the script cannot find the dataset file, then:
-- check your internet connection
-- is the file still available from the URL used 
-- do you have write access to your working directory
 
 In case you run into this error: 'could not find function "mapvalues"', then install package `plyr`
 
@@ -62,16 +63,12 @@ Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ort
 
 This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
-Here's more about the project:
+- The project: [archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
-[archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
-
-Here is the data-file for the project:
-
-[d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+- The data-file : [d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
 
-# More detail 
+# In detail 
 
 The original tasks read as follows: You should create one R script called `run_analysis.R` that does the following.
 
