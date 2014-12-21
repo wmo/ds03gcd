@@ -1,18 +1,19 @@
 # ----------------------------------------------------------------------- 
 #   R program to turn a zipped datafile into a tidy dataset. 
+#   December 2014
 # ---------------------------------------------------------------------- 
 
 
 # ---------------------------------------------------------------------- 
-# configurable variables 
+# Configurable variables 
 
 # the input file name 
 zipfilename <- "UCI HAR Dataset.zip"
-#zipfilename <- "getdata%2Fprojectfiles%2FUCI HAR Dataset.zip"
+#alternative: zipfilename <- "getdata%2Fprojectfiles%2FUCI HAR Dataset.zip"
 
 # the number of observations to read
 max_observations=-1 # read all the rows
-#max_observations=125 # only the first .. rows
+#max_observations=125 # only the first x rows
 # ---------------------------------------------------------------------- 
 
 # load the libraries
@@ -44,7 +45,8 @@ zippedfile2list <- function(
 }
 
 
-# Create a dataframe from the subject, y, and x entries in the zipfile.
+# ---------------------------------------------------------------------- 
+# Function that creates a dataframe from the subject, y, and x entries in the zipfile.
 zippedfiles2dataframe <- function(
         observation_type, # train or test, will be put in the first column of the dataframe
         zipfilename,          # zipfile that serves as input
@@ -79,22 +81,26 @@ zippedfiles2dataframe <- function(
     df
 }
 
+# ---------------------------------------------------------------------- 
+# Reduce the set of feature names to only those with 'mean' and 'std' in their name. 
+# Returns the INDEXES of the selected names. 
 get_selected_colname_idx <- function( colnames ) {
-    # only remain with the mean and standard deviation column names
-    selcolidx<-append(c(1,2,3,4),sort(union(grep("std", colnames,value=F, ignore.case=T), grep("mean",colnames,value=F,ignore.case=T))) )
-
+    # only remain with the first four columns plus the features regarding mean and standard deviation 
+    selcolidx<-append(c(1,2,3,4),sort(union( grep("std", colnames,value=F, ignore.case=T), 
+                                             grep("mean",colnames,value=F,ignore.case=T))) )
     # to be removed from the above set: meanFreq() colnames
     tbr<-grep("meanfreq",colnames, value=F, ignore.case=T)
     # make a list of index values to be removed
     tbri<-sapply(tbr, function(x) { which(x==selcolidx)})
     # remove from selcolidx
     selcolidx<-selcolidx[-tbri]
-    # selected names
+    # index of selected column names
     selcolidx 
 }
 
 # -----------------------------------------------------------
-# MAIN PART 
+# MAIN PART, the processing starts here
+#
 # step 1; read the datafile if we don't have it already
 if(!file.exists(zipfilename)) {
     cat( "Downloading ", zipfilename , "\n")
@@ -104,8 +110,10 @@ if(!file.exists(zipfilename)) {
 }
 
 
-# measure names (aka features) --------------------
-# read the features text file in the zipfile, and convert the names into 'column-name'-safe variants
+# -----------------------------------------------------------
+# step 2: suss out the column names: id columns plus measure names (aka features) 
+#
+# Read the features text file in the zipfile, and convert the names into 'column-name'-safe variants
 # (ie. replace/remove certain characters)
 l<-zippedfile2list(zipfilename,"/features.txt", -1)
 measure_colnames=unlist(lapply(l,function(x) { gsub( " ","",chartr(",()-","   _",x[2]))} ))
@@ -117,8 +125,13 @@ colnames=c( c("observation_type", "activity", "y", "subject" ),  measure_colname
 rm(measure_colnames) # no need for it anymore
 
 
-# Item 1: merge the training and the test sets to create one data set. 
-
+# -----------------------------------------------------------
+# step 3: create the comprehensive dataframe
+#
+# This corresponds to task 1: merge the training and the test sets to create one data set. 
+# Also already done in this step are: 
+# task 3: Uses descriptive activity names to name the activities in the data set
+# task 4: Appropriately labels the data set with descriptive variable names.
 dfc<-rbind(
     zippedfiles2dataframe("test", zipfilename, 
                           "/subject_test.txt","/y_test.txt","/X_test.txt", 
@@ -130,19 +143,30 @@ dfc<-rbind(
 
 
 
-# Item 2: Extracts only the measurements on the mean and standard deviation for each measurement.
+# -----------------------------------------------------------
+# step 4: subset the data: reduce the columns
+#
+# This corresponds to task 2: extract only the measurements on the mean and 
+# standard deviation for each measurement.
 dfs<-dfc[,get_selected_colname_idx(colnames)]
 
+# -----------------------------------------------------------
+# step 5: create a narrow dataframe by 'melting' the dfs dataframe 
+#
 # create a narrow dataframe from 'dfs'
 dfnrw<- melt(dfs,id=c("activity","subject"),measure.vars = names(dfs)[5:ncol(dfs)])
 
 # create a temporary dataframe from the narrow dataframe
 dftmp<-ddply(dfnrw, .(activity,subject,variable ),summarise,mean=mean(value) )
 
+# -----------------------------------------------------------
+# step 6: create the final, tidy dataset
+#
 # cast the narrow, temporary dataframe back to a wide dataframe
+# This corresponds to task 5: from the data set in step 4, creates a second, independent tidy 
+# data set with the average of each variable for each activity and each subject.
 df<-dcast(dftmp, activity + subject ~ variable , value.var="mean")
 
-# drop what we don't need anymore
 rm(colnames,dftmp)  # no need anymore
 
 # done, write to file

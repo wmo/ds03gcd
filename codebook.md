@@ -2,7 +2,7 @@
 
 ## Dictionary 
 
-### Activity 
+#### Activity 
 
 This is the mapping from the integer values in the 'y...' files to the factors. 
 
@@ -16,15 +16,15 @@ This is the mapping from the integer values in the 'y...' files to the factors.
     
 ## Feature names
 
-The feature names are generated from the text file `UCI HAR Dataset/features.txt` that is found in the data file.
+The feature or measure names are generated from the text file `UCI HAR Dataset/features.txt` included in the data file.
 
 The transformations applied were (see function 'get_selected_colname_idx()' in 'run_analysis.R': 
 - replace '-' (dash) by '_' (underscore)
-- drop comma's and parenthesis and spaces 
+- drop commas, parenthesis and spaces 
 
-### CamelCase feature names
+#### CamelCase feature names
 
-Normally tidy data requires column names to be all lowercase, but I decided against this for the features names, because it reduces the legibility. 
+Normally tidy data requires column names to be all lowercase, but it was decided against this for the features names, because of legibility reasons. 
 
 Eg. consider following CamelCase column names: 
 
@@ -32,25 +32,27 @@ Eg. consider following CamelCase column names:
     angletBodyAccJerkMeangravityMean 
     angletBodyGyroMeangravityMean 
 
-which would be the following in lowercase 
+which would be the following in lowercase : 
 
     angletbodyaccmeangravity 
     angletbodyaccjerkmeangravitymean 
     angletbodygyromeangravitymean 
 
-Which ones are more legible? I think everybody would agree that the CamelCase version is more legible.
+Which type is more legible? Few people will disagree with the CamelCase being more legible.
 
-### Issues with column names
+### Issues with feature names
 
-It was noted there are duplicate column names listed in the `UCI HAR Dataset/features.txt`. 
+It was noted there are duplicate feature names listed in the `UCI HAR Dataset/features.txt`. 
 
-These are the ones: (note: function zippedfile2list() of run_analysis.R is used here, so you want to source that script first)
+To find the dupes: 
 
         l<-zippedfile2list(zipfilename,"/features.txt", -1)
         c<-count(unlist(lapply(l,function(x) { x[2]} )))
         c[c$freq>1,]
 
-List the duplicates:
+(note: function zippedfile2list() of run_analysis.R is used in above code, so source that script first)
+
+List of the duplicates feauture names:
 
         > c[c$freq>1,]
                                            x freq
@@ -97,9 +99,9 @@ List the duplicates:
         174    fBodyGyro-bandsEnergy()-57,64    3
         175     fBodyGyro-bandsEnergy()-9,16    3
 
-Fortunately nothing needs to be done about this: 
-- the R processing done here, can live with the duplicate colunm names
-- the duplicate column names are not required in the tidy dataset  
+Fortunately nothing needs to be done about this, since ..
+- none of the duplicate column names are required in the tidy dataset  
+- the R processing done in this script, can live with the duplicate colunm names
 
 ## Extensive list of column names 
 
