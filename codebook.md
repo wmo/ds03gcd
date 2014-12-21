@@ -1,80 +1,79 @@
-# Codebook
+#Codebook
 
-The first two columns of the dataset are the activity and the subject. 
-The rest of the columns are the features
+In short: the first two columns of the dataset are the activity and the subject.  The remainder are all numerical features as described in the `features.txt` file included in the zip. 
 
-- activity
-- subject
-- tBodyAcc_mean_X
-- tBodyAcc_mean_Y
-- tBodyAcc_mean_Z
-- tBodyAcc_std_X
-- tBodyAcc_std_Y
-- tBodyAcc_std_Z
-- tGravityAcc_mean_X
-- tGravityAcc_mean_Y
-- tGravityAcc_mean_Z
-- tGravityAcc_std_X
-- tGravityAcc_std_Y
-- tGravityAcc_std_Z
-- tBodyAccJerk_mean_X
-- tBodyAccJerk_mean_Y
-- tBodyAccJerk_mean_Z
-- tBodyAccJerk_std_X
-- tBodyAccJerk_std_Y
-- tBodyAccJerk_std_Z
-- tBodyGyro_mean_X
-- tBodyGyro_mean_Y
-- tBodyGyro_mean_Z
-- tBodyGyro_std_X
-- tBodyGyro_std_Y
-- tBodyGyro_std_Z
-- tBodyGyroJerk_mean_X
-- tBodyGyroJerk_mean_Y
-- tBodyGyroJerk_mean_Z
-- tBodyGyroJerk_std_X
-- tBodyGyroJerk_std_Y
-- tBodyGyroJerk_std_Z
-- tBodyAccMag_mean
-- tBodyAccMag_std
-- tGravityAccMag_mean
-- tGravityAccMag_std
-- tBodyAccJerkMag_mean
-- tBodyAccJerkMag_std
-- tBodyGyroMag_mean
-- tBodyGyroMag_std
-- tBodyGyroJerkMag_mean
-- tBodyGyroJerkMag_std
-- fBodyAcc_mean_X
-- fBodyAcc_mean_Y
-- fBodyAcc_mean_Z
-- fBodyAcc_std_X
-- fBodyAcc_std_Y
-- fBodyAcc_std_Z
-- fBodyAccJerk_mean_X
-- fBodyAccJerk_mean_Y
-- fBodyAccJerk_mean_Z
-- fBodyAccJerk_std_X
-- fBodyAccJerk_std_Y
-- fBodyAccJerk_std_Z
-- fBodyGyro_mean_X
-- fBodyGyro_mean_Y
-- fBodyGyro_mean_Z
-- fBodyGyro_std_X
-- fBodyGyro_std_Y
-- fBodyGyro_std_Z
-- fBodyAccMag_mean
-- fBodyAccMag_std
-- fBodyBodyAccJerkMag_mean
-- fBodyBodyAccJerkMag_std
-- fBodyBodyGyroMag_mean
-- fBodyBodyGyroMag_std
-- fBodyBodyGyroJerkMag_mean
-- fBodyBodyGyroJerkMag_std
-- angletBodyAccMeangravity
-- angletBodyAccJerkMeangravityMean
-- angletBodyGyroMeangravityMean
-- angletBodyGyroJerkMeangravityMean
-- angleXgravityMean
-- angleYgravityMean
-- angleZgravityMean
+- **`activity`** :  WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
+- **`subject`** : integer value between 1 and 30
+- **`tBodyAcc_mean_X`** : feature, numerical 
+- **`tBodyAcc_mean_Y`** : feature, numerical 
+- **`tBodyAcc_mean_Z`** : feature, numerical 
+- **`tBodyAcc_std_X`** : feature, numerical 
+- **`tBodyAcc_std_Y`** : feature, numerical 
+- **`tBodyAcc_std_Z`** : feature, numerical 
+- **`tGravityAcc_mean_X`** : feature, numerical 
+- **`tGravityAcc_mean_Y`** : feature, numerical 
+- **`tGravityAcc_mean_Z`** : feature, numerical 
+- **`tGravityAcc_std_X`** : feature, numerical 
+- **`tGravityAcc_std_Y`** : feature, numerical 
+- **`tGravityAcc_std_Z`** : feature, numerical 
+- **`tBodyAccJerk_mean_X`** : feature, numerical 
+- **`tBodyAccJerk_mean_Y`** : feature, numerical 
+- **`tBodyAccJerk_mean_Z`** : feature, numerical 
+- **`tBodyAccJerk_std_X`** : feature, numerical 
+- **`tBodyAccJerk_std_Y`** : feature, numerical 
+- **`tBodyAccJerk_std_Z`** : feature, numerical 
+- **`tBodyGyro_mean_X`** : feature, numerical 
+- **`tBodyGyro_mean_Y`** : feature, numerical 
+- **`tBodyGyro_mean_Z`** : feature, numerical 
+- **`tBodyGyro_std_X`** : feature, numerical 
+- **`tBodyGyro_std_Y`** : feature, numerical 
+- **`tBodyGyro_std_Z`** : feature, numerical 
+- **`tBodyGyroJerk_mean_X`** : feature, numerical 
+- **`tBodyGyroJerk_mean_Y`** : feature, numerical 
+- **`tBodyGyroJerk_mean_Z`** : feature, numerical 
+- **`tBodyGyroJerk_std_X`** : feature, numerical 
+- **`tBodyGyroJerk_std_Y`** : feature, numerical 
+- **`tBodyGyroJerk_std_Z`** : feature, numerical 
+- **`tBodyAccMag_mean`** : feature, numerical 
+- **`tBodyAccMag_std`** : feature, numerical 
+- **`tGravityAccMag_mean`** : feature, numerical 
+- **`tGravityAccMag_std`** : feature, numerical 
+- **`tBodyAccJerkMag_mean`** : feature, numerical 
+- **`tBodyAccJerkMag_std`** : feature, numerical 
+- **`tBodyGyroMag_mean`** : feature, numerical 
+- **`tBodyGyroMag_std`** : feature, numerical 
+- **`tBodyGyroJerkMag_mean`** : feature, numerical 
+- **`tBodyGyroJerkMag_std`** : feature, numerical 
+- **`fBodyAcc_mean_X`** : feature, numerical 
+- **`fBodyAcc_mean_Y`** : feature, numerical 
+- **`fBodyAcc_mean_Z`** : feature, numerical 
+- **`fBodyAcc_std_X`** : feature, numerical 
+- **`fBodyAcc_std_Y`** : feature, numerical 
+- **`fBodyAcc_std_Z`** : feature, numerical 
+- **`fBodyAccJerk_mean_X`** : feature, numerical 
+- **`fBodyAccJerk_mean_Y`** : feature, numerical 
+- **`fBodyAccJerk_mean_Z`** : feature, numerical 
+- **`fBodyAccJerk_std_X`** : feature, numerical 
+- **`fBodyAccJerk_std_Y`** : feature, numerical 
+- **`fBodyAccJerk_std_Z`** : feature, numerical 
+- **`fBodyGyro_mean_X`** : feature, numerical 
+- **`fBodyGyro_mean_Y`** : feature, numerical 
+- **`fBodyGyro_mean_Z`** : feature, numerical 
+- **`fBodyGyro_std_X`** : feature, numerical 
+- **`fBodyGyro_std_Y`** : feature, numerical 
+- **`fBodyGyro_std_Z`** : feature, numerical 
+- **`fBodyAccMag_mean`** : feature, numerical 
+- **`fBodyAccMag_std`** : feature, numerical 
+- **`fBodyBodyAccJerkMag_mean`** : feature, numerical 
+- **`fBodyBodyAccJerkMag_std`** : feature, numerical 
+- **`fBodyBodyGyroMag_mean`** : feature, numerical 
+- **`fBodyBodyGyroMag_std`** : feature, numerical 
+- **`fBodyBodyGyroJerkMag_mean`** : feature, numerical 
+- **`fBodyBodyGyroJerkMag_std`** : feature, numerical 
+- **`angletBodyAccMeangravity`** : feature, numerical 
+- **`angletBodyAccJerkMeangravityMean`** : feature, numerical 
+- **`angletBodyGyroMeangravityMean`** : feature, numerical 
+- **`angletBodyGyroJerkMeangravityMean`** : feature, numerical 
+- **`angleXgravityMean`** : feature, numerical 
+- **`angleYgravityMean`** : feature, numerical 
+- **`angleZgravityMean`** : feature, numerical 
