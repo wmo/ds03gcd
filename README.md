@@ -2,16 +2,13 @@
 
 - Clone this repository
 - Put the data-file in the same directory as "run_analysis.R" 
-- startup R and run: 
-
-    source "run_analysis.R" 
-
-- after a while of huffing and puffing, you get the final tidy dataset in dataframe **`df`**
+- startup R and run: `source "run_analysis.R"`
+- after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
 It will look like this, when opened in rstudio: 
 ![](sample_snap.png)
 
-See [codebook](codebook.md] for description of the datafields.
+See [codebook](codebook.md) for description of the datafields.
 
 
 # Extras
