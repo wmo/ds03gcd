@@ -2,6 +2,14 @@
 
 The data analysed is the [Human Activity Recognition Using Smartphones Data Set](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones), in which 30 volunteers performed 6 activities ( walking, sitting,...) while wearing on their waist a smarthphone which recorded the data of the accelerometer and gyroscope. 
 
+The data-file can be downloaded here : [d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+
+### Acknowledgement 
+
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
+
 # Quick start
 
 Note: the script takes care of downloading and caching the datafile. 
@@ -35,8 +43,8 @@ Experimentation: for performance reasons you may want to play around with only a
 
 You should have an installation of R with following extra packages installed:
 
-    - plyr
-    - reshape2
+- plyr
+- reshape2
 
 The zipfile has should have these files in one of the subdirectories: 
 
@@ -54,18 +62,6 @@ The zipfile has should have these files in one of the subdirectories:
 In case you run into this error: 'could not find function "mapvalues"', then install package `plyr`
 
 In case you encounter this error: 'could not find function "melt"', then install package `reshape2`
-
-# Acknowledgement
-
-The dataset used is from this publication: 
-
-Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
-
-- The project: [archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
-
-- The data-file : [d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
 
 # In detail 
