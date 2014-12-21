@@ -1,16 +1,17 @@
 # ----------------------------------------------------------------------- 
 #   R program to turn a zipped datafile into a tidy dataset. 
+#   Github project: https://github.com/wmo/ds03gcd
 #   December 2014
 # ---------------------------------------------------------------------- 
 
 
 # ---------------------------------------------------------------------- 
 # Configurable variables 
-
+#
 # the input file name 
 zipfilename <- "UCI HAR Dataset.zip"
 #alternative: zipfilename <- "getdata%2Fprojectfiles%2FUCI HAR Dataset.zip"
-
+#
 # the number of observations to read
 max_observations=-1 # read all the rows
 #max_observations=125 # only the first x rows
@@ -101,7 +102,7 @@ get_selected_colname_idx <- function( colnames ) {
 # -----------------------------------------------------------
 # MAIN PART, the processing starts here
 #
-# step 1; read the datafile if we don't have it already
+# step 1; download the datafile if we don't have it already
 if(!file.exists(zipfilename)) {
     cat( "Downloading ", zipfilename , "\n")
     fileUrl <- "d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -120,7 +121,7 @@ measure_colnames=unlist(lapply(l,function(x) { gsub( " ","",chartr(",()-","   _"
 rm(l) # no need for 'l' anymore
 
 # the comprehensive dataframe has id-columns (first 4 columns) and measure columns (the remainder of the columns)
-# colnames = id_column_names + measure_colnames)
+# colnames = id_column_names + measure_colnames
 colnames=c( c("observation_type", "activity", "y", "subject" ),  measure_colnames)
 rm(measure_colnames) # no need for it anymore
 
@@ -129,9 +130,9 @@ rm(measure_colnames) # no need for it anymore
 # step 3: create the comprehensive dataframe
 #
 # This corresponds to task 1: merge the training and the test sets to create one data set. 
-# Also already done in this step are: 
-# task 3: Uses descriptive activity names to name the activities in the data set
-# task 4: Appropriately labels the data set with descriptive variable names.
+# Also already taken care of in this step are: 
+# - task 3: Uses descriptive activity names to name the activities in the data set
+# - task 4: Appropriately labels the data set with descriptive variable names.
 dfc<-rbind(
     zippedfiles2dataframe("test", zipfilename, 
                           "/subject_test.txt","/y_test.txt","/X_test.txt", 
@@ -141,10 +142,8 @@ dfc<-rbind(
                           colnames, max_observations)
    )
 
-
-
 # -----------------------------------------------------------
-# step 4: subset the data: reduce the columns
+# step 4: subset the data: reduce the number of columns
 #
 # This corresponds to task 2: extract only the measurements on the mean and 
 # standard deviation for each measurement.
@@ -153,7 +152,6 @@ dfs<-dfc[,get_selected_colname_idx(colnames)]
 # -----------------------------------------------------------
 # step 5: create a narrow dataframe by 'melting' the dfs dataframe 
 #
-# create a narrow dataframe from 'dfs'
 dfnrw<- melt(dfs,id=c("activity","subject"),measure.vars = names(dfs)[5:ncol(dfs)])
 
 # create a temporary dataframe from the narrow dataframe
@@ -162,13 +160,14 @@ dftmp<-ddply(dfnrw, .(activity,subject,variable ),summarise,mean=mean(value) )
 # -----------------------------------------------------------
 # step 6: create the final, tidy dataset
 #
-# cast the narrow, temporary dataframe back to a wide dataframe
-# This corresponds to task 5: from the data set in step 4, creates a second, independent tidy 
-# data set with the average of each variable for each activity and each subject.
+# Cast the narrow, temporary dataframe back to a wide dataframe.
+# This corresponds to task 5: from the data set in step 4, creates a 
+# second, independent tidy data set with the average of each variable 
+# for each activity and each subject.
 df<-dcast(dftmp, activity + subject ~ variable , value.var="mean")
 
 rm(colnames,dftmp)  # no need anymore
 
-# done, write to file
-#write.table(df,file="df.txt",row.names=F)  # the to-be-uploaded data
-#write.table(names(df),file="colnames.txt",row.names=F)  # the column names of the df, serves as source for codebook.
+# Done, write to file, if needed.
+#write.table(df,file="df.txt",row.names=F)              # the to-be-uploaded data
+#write.table(names(df),file="colnames.txt",row.names=F) # the column names, used to make the codebook.
