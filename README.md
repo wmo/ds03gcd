@@ -5,14 +5,49 @@
 - startup R and run: `source "run_analysis.R"`
 - after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
-It will look like this, when opened in rstudio: 
+The dataframe will look like this, when opened in RStudio: 
 ![](sample_snap.png)
+It has these dimensions: 180 observations of 75 variables.
 
 See [codebook](codebook.md) for description of the datafields.
 
+## Extras
 
-# Extras
+Extra dataframes created in the process:
 
+- `dfc` : the comprehensive dataframe, contains all columns, all data 
+- `dfs` : the selective dataframe, is the same as `dfc` but with the feature columns whitled down to only *std* and *mean* 
+- `dfnrw` : the narrow dataframe, which is a molten form of dfs, and which formed the basic to create the final `df`
+
+
+# Preconditions
+
+You should have R installed plus following packages:
+
+    - plyr
+    - reshape2
+
+The datafile has should have these files (subdirectory in which these are is of no importance) 
+
+- ../features.txt 
+- ../subject_test.txt 
+- ../y_test.txt 
+- ../X_test.txt 
+- ../subject_train.txt 
+- ../y_train.txt 
+- ../X_train.txt 
+
+
+## Quick-fix to common problems
+
+In case the script cannot find the dataset file, then either:
+
+- rename the file to "UCI HAR Dataset.zip" (warning: contains whitespaces), or
+- edit the `run_analysis.R` script, and change the variable `zipfilename` to the exact filename
+
+In case you run into this error: 'could not find function "mapvalues"', then install package `plyr`
+
+In case you encounter this error: 'could not find function "melt"', then install package `reshape2`
 
 
 # DRAFT AFTER THIS LINE 

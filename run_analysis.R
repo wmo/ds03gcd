@@ -1,18 +1,23 @@
-# libraries
-
-library(plyr) # ??? 
-library(reshape2) # ??? 
+# ---------------------------------------------------------------------- 
+#   R program to turn a zipped datafile into a tidy dataset. 
+# ---------------------------------------------------------------------- 
 
 
 # ---------------------------------------------------------------------- 
-# --- global variables --- 
+# configurable variables 
+
+# the input file name 
+zipfilename <- "UCI HAR Dataset.zip"
+#zipfilename <- "getdata%2Fprojectfiles%2FUCI HAR Dataset.zip"
+
+# the number of observations to read
 max_observations=-1 # read all the rows
 #max_observations=125 # only the first .. rows
-
-#zipfilename<-"klad_dataset.zip"
-zipfilename<-"UCI_HAR_Dataset.zip" # underscores in orig filename???
-# --- end of global variables section --- 
 # ---------------------------------------------------------------------- 
+
+# load the libraries
+library(plyr) 
+library(reshape2) # ??? 
 
 # ---------------------------------------------------------------------- 
 # Function that reads a file within the zipfile and returns the content
@@ -130,7 +135,7 @@ dfnrw<- melt(dfs,id=c("activity","subject"),measure.vars = names(dfs)[5:ncol(dfs
 dftmp<-ddply(dfnrw, .(activity,subject,variable ),summarise,mean=mean(value) )
 
 df<-dcast(dftmp, activity + subject ~ variable , value.var="mean")
-rm(colnames,dftmp,dfnrw)  # no need anymore
+rm(colnames,dftmp)  # no need anymore
 
 # done, write to file
 #write.table(df,file="df.txt",row.names=F)  # the to-be-uploaded data
