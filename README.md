@@ -1,7 +1,7 @@
 # Quick start
 
 - Clone this repository
-- Put the data-file in the same directory as "run_analysis.R" 
+- Put the data-file in the same directory as "run_analysis.R" (no need to unzip)
 - startup R and run: `source "run_analysis.R"`
 - after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
@@ -51,6 +51,14 @@ In case the script cannot find the dataset file, then either:
 In case you run into this error: 'could not find function "mapvalues"', then install package `plyr`
 
 In case you encounter this error: 'could not find function "melt"', then install package `reshape2`
+
+# Acknowledgement
+
+The dataset used is from this publication: 
+
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
 
 # More detail 
