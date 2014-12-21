@@ -93,6 +93,17 @@ get_selected_colname_idx <- function( colnames ) {
     selcolidx 
 }
 
+# -----------------------------------------------------------
+# MAIN PART 
+# step 1; read the datafile if we don't have it already
+if(!file.exists(zipfilename)) {
+    cat( "Downloading ", zipfilename , "\n")
+    fileUrl <- "d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+    download.file(fileUrl,destfile=zipfilename,method="curl")
+    dateDownloaded <- date()
+}
+
+
 # measure names (aka features) --------------------
 # read the features text file in the zipfile, and convert the names into 'column-name'-safe variants
 # (ie. replace/remove certain characters)
@@ -116,7 +127,6 @@ dfc<-rbind(
                           "/subject_train.txt","/y_train.txt","/X_train.txt", 
                           colnames, max_observations)
    )
-
 
 
 

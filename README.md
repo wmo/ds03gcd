@@ -1,10 +1,10 @@
 # Quick start
 
-- Clone this repository
-- Retrieve the zipped datafile from [d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
-- Rename this file to "UCI HAR Dataset.zip" (warning: contains whitespaces)
-- Put the zip-file in the same directory as "run_analysis.R" (no need to unzip)
-- startup R and run: `source "run_analysis.R"`
+Note: the script takes care of downloading and caching the datafile. 
+
+- Clone this repository: `git clone https://github.com/wmo/ds03gcd`
+- Go to the directory: `cd ds03gcd`
+- startup R and enter: `source "run_analysis.R"`
 - after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
 The dataframe will look like this, when viewed in RStudio: 
@@ -45,10 +45,10 @@ The datafile has should have these files (subdirectory in which these are is of 
 
 ## Quick-fix to common problems
 
-In case the script cannot find the dataset file, then either:
-
-- rename the file to "UCI HAR Dataset.zip" (warning: contains whitespaces), or
-- edit the `run_analysis.R` script, and change the variable `zipfilename` to the exact filename
+In case the script cannot find the dataset file, then:
+- check your internet connection
+- is the file still available from the URL used 
+- do you have write access to your working directory
 
 In case you run into this error: 'could not find function "mapvalues"', then install package `plyr`
 
