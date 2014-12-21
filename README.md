@@ -1,7 +1,9 @@
 # Quick start
 
 - Clone this repository
-- Put the data-file in the same directory as "run_analysis.R" (no need to unzip)
+- Retrieve the zipped datafile from [d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+- Rename this file to "UCI HAR Dataset.zip" (warning: contains whitespaces)
+- Put the zip-file in the same directory as "run_analysis.R" (no need to unzip)
 - startup R and run: `source "run_analysis.R"`
 - after a while of huffing and puffing, you get the final tidy dataset in dataframe `df`
 
@@ -20,7 +22,7 @@ The requested dataframe `df` contains the final, tidy data-set, but there are so
 - `dfs` : the selective dataframe, is the same as `dfc` but with the feature columns whitled down to only *std* and *mean* 
 - `dfnrw` : the narrow dataframe, which is a molten form of `dfs`, and which formed the basis to create the final `df` from.
 
-For playing around with a limited number of rows of data, change the variable `max_observations` for example to '125' in the script. This gives a faster load time, and it also is faster to do certain transforms. 
+For performance reasons you may want to play around with only a subset of the data. This can be easily done: change the variable `max_observations` for example to '125' in the script. This gives a faster load time, and it also is faster to do certain transformations.
 
 
 # Preconditions
