@@ -1,4 +1,4 @@
-# ---------------------------------------------------------------------- 
+# ----------------------------------------------------------------------- 
 #   R program to turn a zipped datafile into a tidy dataset. 
 # ---------------------------------------------------------------------- 
 
@@ -95,9 +95,8 @@ get_selected_colname_idx <- function( colnames ) {
 
 # measure names (aka features) --------------------
 # read the features text file in the zipfile, and convert the names into 'column-name'-safe variants
-# (ie. replace/remove certain characters and all letters to lowercase) 
+# (ie. replace/remove certain characters)
 l<-zippedfile2list(zipfilename,"/features.txt", -1)
-#measure_colnames=unlist(lapply(l,function(x) { tolower(gsub( " ","",chartr(",()-","   _",x[2])))} ))
 measure_colnames=unlist(lapply(l,function(x) { gsub( " ","",chartr(",()-","   _",x[2]))} ))
 rm(l) # no need for 'l' anymore
 
@@ -107,7 +106,7 @@ colnames=c( c("observation_type", "activity", "y", "subject" ),  measure_colname
 rm(measure_colnames) # no need for it anymore
 
 
-# Item 1: Merges the training and the test sets to create one data set. 
+# Item 1: merge the training and the test sets to create one data set. 
 
 dfc<-rbind(
     zippedfiles2dataframe("test", zipfilename, 
@@ -124,17 +123,16 @@ dfc<-rbind(
 # Item 2: Extracts only the measurements on the mean and standard deviation for each measurement.
 dfs<-dfc[,get_selected_colname_idx(colnames)]
 
+# create a narrow dataframe from 'dfs'
 dfnrw<- melt(dfs,id=c("activity","subject"),measure.vars = names(dfs)[5:ncol(dfs)])
 
-#dftmp<-ddply(dfnrw, .(activity,subject,variable ),summarise,mean=mean(value) )
-#dftmp$actsub=mapply(function(x,y) { sprintf("%s_%.2d",x,y) }, dftmp$activity,dftmp$subject)
-#dftmp$activity=NULL # drop column
-#dftmp$subject=NULL  # drop column
-#dfavg<-dcast(dftmp, variable ~ actsub, value.var="mean")
-
+# create a temporary dataframe from the narrow dataframe
 dftmp<-ddply(dfnrw, .(activity,subject,variable ),summarise,mean=mean(value) )
 
+# cast the narrow, temporary dataframe back to a wide dataframe
 df<-dcast(dftmp, activity + subject ~ variable , value.var="mean")
+
+# drop what we don't need anymore
 rm(colnames,dftmp)  # no need anymore
 
 # done, write to file
